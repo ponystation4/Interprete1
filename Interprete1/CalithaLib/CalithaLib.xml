@@ -1,0 +1,468 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CalithaLib</name>
+    </assembly>
+    <members>
+        <member name="T:com.calitha.commons.FileUtil">
+            <summary>
+            The FilUtil class contains a selection of convenience methods
+            for dealing with files.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.FileUtil.IsUTF16LE(System.IO.Stream)">
+            <summary>
+            Determines if a stream contains a BOM for UTF-16 Little Endian.
+            </summary>
+            <param name="stream">stream</param>
+            <returns>true if it contains the BOM, otherwise false</returns>
+        </member>
+        <member name="M:com.calitha.commons.FileUtil.IsUTF16LE(System.String)">
+            <summary>
+            Determines if a file contains a BOM for UTF-16 Little Endian.
+            </summary>
+            <param name="filename">stream</param>
+            <returns>true if it contains the BOM, otherwise false.</returns>
+        </member>
+        <member name="T:com.calitha.commons.ArraySet">
+            <summary>
+            Implements a set by using an ArrayList internally.
+            It is thefore only wise to use it for small collections.
+            </summary>
+        </member>
+        <member name="T:com.calitha.commons.AbstractSet">
+            <summary>
+            AbstractSet can be extended to implement a set that uses
+            a collection instance to achieve the set functionality
+            </summary>
+        </member>
+        <member name="T:com.calitha.commons.ISet">
+            <summary>
+            ISet is the interface used for all modifiable collections of object,
+            in which the objects has no order.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.ISet.Add(System.Object)">
+            <summary>
+            Adds an object to the set.
+            </summary>
+            <param name="obj">Object added</param>
+        </member>
+        <member name="M:com.calitha.commons.ISet.Clear">
+            <summary>
+            Clears the entire set.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.ISet.Contains(System.Object)">
+            <summary>
+            Determines if the set contains and object.
+            </summary>
+            <param name="obj">The object to search for.</param>
+            <returns>True of the set contains it, otherwise false.</returns>
+        </member>
+        <member name="M:com.calitha.commons.ISet.Remove(System.Object)">
+            <summary>
+            Removes an object from the set.
+            </summary>
+            <param name="obj">Object being removed.</param>
+        </member>
+        <member name="M:com.calitha.commons.AbstractSet.#ctor(System.Collections.ICollection)">
+            <summary>
+            This class itself is abstract, but this constructor can be called
+            by extending classes to achieve common functionality for sets
+            using a collection aggregate instance.
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="M:com.calitha.commons.AbstractSet.CopyTo(System.Array,System.Int32)">
+            <summary>
+            When implemented by a class, copies the elements of the ICollection 
+            to an Array, starting at a particular Array index.
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination 
+            of the elements copied from ICollection. The Array must have 
+            zero-based indexing.</param>
+            <param name="index">The zero-based index in array at which 
+            copying begins.</param>
+        </member>
+        <member name="P:com.calitha.commons.AbstractSet.Count">
+            <summary>
+            Number of objects currently in the collection.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.AbstractSet.IsSynchronized">
+            <summary>
+            When implemented by a class, gets a value indicating whether
+            access to the ICollection is synchronized (thread-safe).
+            </summary>
+            
+        </member>
+        <member name="P:com.calitha.commons.AbstractSet.SyncRoot">
+            <summary>
+            When implemented by a class, gets an object that can be used
+            to synchronize access to the ICollection.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.ArraySet.GetEnumerator">
+            <summary>
+            Returns an enumerator that can iterate through a collection.
+            </summary>
+            <returns>An IEnumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="T:com.calitha.commons.IntegerList">
+            <summary>
+            A type-safe list of integers.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.#ctor">
+            <summary>
+            Creates a new integer list.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Add(System.Int32)">
+            <summary>
+            Adds an integer to a list.
+            </summary>
+            <param name="value">The value that will be added.</param>
+            <returns>Index at which the value has been added.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Clear">
+            <summary>
+            Removes all elements from the list.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Clone">
+            <summary>
+            A shallow copy of the list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.CopyTo(System.Array)">
+            <summary>
+            Copies the entire list to a compatible one-dimensional array,
+            starting at the beginning of the target array.
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination
+            of the elements copied from the list.
+            The Array must have zero-based indexing.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies the entire list to a compatible one-dimensional Array, 
+            starting at the specified index of the target array.
+            </summary>
+            <param name="array">The one-dimensional Array that is the destination
+            of the elements copied from ArrayList.
+            The Array must have zero-based indexing. </param>
+            <param name="arrayIndex">The zero-based index in array at which
+            copying begins.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.CopyTo(System.Int32,System.Array,System.Int32,System.Int32)">
+            <summary>
+            Copies a range of elements from the list to a compatible one-dimensional
+            Array, starting at the specified index of the target array.
+            </summary>
+            <param name="index">The zero-based index in the source list at which copying begins.</param>
+            <param name="array">The one-dimensional Array that is the destination of
+            the elements copied from the list. The Array must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+            <param name="count">The number of elements to copy.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Equals(System.Object)">
+            <summary>
+            Determines whether the specified Object is equal to the current Object.
+            </summary>
+            <param name="obj">The Object to compare with the current Object.</param>
+            <returns>true if the specified Object is equal to the current Object;
+            otherwise, false.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Equals(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified Object instances are considered equal.
+            </summary>
+            <param name="objA">The first Object to compare.</param>
+            <param name="objB">The second Object to compare.</param>
+            <returns>true if objA is the same instance as objB or if both are null
+            references or if objA.Equals(objB) returns true; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.GetEnumerator">
+            <summary>
+            Returns an enumerator for the entire list.
+            </summary>
+            <returns>The enumerator.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.GetEnumerator(System.Int32,System.Int32)">
+            <summary>
+            Returns an enumerator for a section of the ArrayList.
+            </summary>
+            <param name="index">The zero-based starting index of the ArrayList section
+            that the enumerator should refer to.</param>
+            <param name="count">The number of elements in the ArrayList section that
+            the enumerator should refer to</param>
+            <returns>The enumerator.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.GetHashCode">
+            <summary>
+            Serves as a hash function.
+            </summary>
+            <returns>A hash code.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.GetRange(System.Int32,System.Int32)">
+            <summary>
+            Returns an integer list which represents a subset of the elements in
+            the source list.
+            </summary>
+            <param name="index">The zero-based list index at which the range starts.</param>
+            <param name="count">The number of elements in the range.</param>
+            <returns>An integer list which represents a subset of the elements
+            in the source list.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.IndexOf(System.Int32)">
+            <summary>
+            Searches for the specified Object and returns the zero-based index of
+            the first occurrence within the entire list.
+            </summary>
+            <param name="value">The value to locate in the list.</param>
+            <returns>The zero-based index of the first occurrence of value within the
+            entire list, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.IndexOf(System.Int32,System.Int32)">
+            <summary>
+            Searches for the specified Object and returns the zero-based index of the
+            first occurrence within the section of the ArrayList that extends from the
+            specified index to the last element.
+            </summary>
+            <param name="value">The value to locate in the list.</param>
+            <param name="startIndex">The zero-based starting index of the search.</param>
+            <returns>The zero-based index of the first occurrence of value within the section
+            of the ArrayList that extends from startIndex to the last element, if found;
+            otherwise, -1.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.IndexOf(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Searches for the specified Object and returns the zero-based index of the
+            first occurrence within the section of the list that starts at the specified
+            index and contains the specified number of elements.
+            </summary>
+            <param name="value">The value to locate in the list.</param>
+            <param name="startIndex">The zero-based starting index of the search.</param>
+            <param name="count">The number of elements in the section to search.</param>
+            <returns>The zero-based index of the first occurrence of value within the
+            section of the ArrayList that starts at startIndex and contains count number
+            of elements, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Insert(System.Int32,System.Int32)">
+            <summary>
+            Inserts an element into the list at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which value should be inserted.</param>
+            <param name="value">The value to insert.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.InsertRange(System.Int32,com.calitha.commons.IntegerList)">
+            <summary>
+            Inserts the elements of the other integer list into the list at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which the new elements should be inserted.</param>
+            <param name="other">The other list whose elements should be inserted into the list.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.LastIndexOf(System.Int32)">
+            <summary>
+            Searches for the specified value and returns the zero-based index of the last
+            occurrence within the entire list.
+            </summary>
+            <param name="value">The value to locate in the list.</param>
+            <returns>The zero-based index of the last occurrence of value within the entire
+            list, if found; otherwise, -1.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.LastIndexOf(System.Int32,System.Int32)">
+            <summary>
+            Searches for the specified value and returns the zero-based index of the last
+            occurrence within the section of the list that extends from the first element
+            to the specified index
+            </summary>
+            <param name="value">The value to search for.</param>
+            <param name="startIndex">The zero-based starting index of the backward search.</param>
+            <returns>The zero-based index of the last occurrence of value within the section
+            of the list that extends from the first element to startIndex, if found;
+            otherwise, -1.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.LastIndexOf(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Searches for the specified value and returns the zero-based index of the
+            last occurrence within the section of the list that contains the specified
+            number of elements and ends at the specified index.
+            </summary>
+            <param name="value">The value to locate in the list.</param>
+            <param name="startIndex">The zero-based starting index of the backward search.</param>
+            <param name="count">The number of elements in the section to search.</param>
+            <returns>The zero-based index of the last occurrence of value within the section
+            of the list that extends from the first element to startIndex, if found;
+            otherwise, -1.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Remove(System.Int32)">
+            <summary>
+            Removes the first occurrence of a specific value from the list.
+            </summary>
+            <param name="value">The value to remove from the list.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.RemoveAt(System.Int32)">
+            <summary>
+            Removes the element at the specified index of the list.
+            </summary>
+            <param name="index">The zero-based index of the element to remove.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.RemoveRange(System.Int32,System.Int32)">
+            <summary>
+            Removes a range of elements from the list.
+            </summary>
+            <param name="index">The zero-based starting index of the range of elements to remove.</param>
+            <param name="count">The number of elements to remove.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Repeat(System.Int32,System.Int32)">
+            <summary>
+            Returns an IntegerList whose elements are copies of the specified value.
+            </summary>
+            <param name="value">The value to copy multiple times in the list.</param>
+            <param name="count">The number of times value should be copied.</param>
+            <returns>An IntegerList with count number of elements, all of which are copies of value.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Reverse">
+            <summary>
+            Reverses the order of the elements in the entire list.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Reverse(System.Int32,System.Int32)">
+            <summary>
+            Reverses the order of the elements in the specified range.
+            </summary>
+            <param name="index">The zero-based starting index of the range to reverse.</param>
+            <param name="count">The number of elements in the range to reverse.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.SetRange(System.Int32,com.calitha.commons.IntegerList)">
+            <summary>
+            Copies the elements of a collection over a range of elements in the list.
+            </summary>
+            <param name="index">The zero-based index at which to start copying the elements
+            of otherList</param>
+            <param name="otherList">The other list whose elements to copy to the list.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Sort">
+            <summary>
+            Sorts the elements in the entire list using the IComparable implementation
+            of the Integer.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Sort(System.Collections.IComparer)">
+            <summary>
+            Sorts the elements in the entire ArrayList using the specified comparer.
+            </summary>
+            <param name="comparer">The IComparer implementation to use when comparing elements.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Sort(System.Int32,System.Int32,System.Collections.IComparer)">
+            <summary>
+            Sorts the elements in a section of the list using the specified comparer.
+            </summary>
+            <param name="index">The zero-based starting index of the range to sort.</param>
+            <param name="count">The length of the range to sort.</param>
+            <param name="comparer">The IComparer implementation to use when comparing elements.</param>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.Synchronized(com.calitha.commons.IntegerList)">
+            <summary>
+            Returns an IntegerList wrapper that is synchronized.
+            </summary>
+            <param name="list">The list to synchronize.</param>
+            <returns>An IntegerList wrapper that is synchronized (thread-safe).</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.ToString">
+            <summary>
+            Returns a String that represents the list.
+            </summary>
+            <returns>A String that represents the current list.</returns>
+        </member>
+        <member name="M:com.calitha.commons.IntegerList.TrimToSize">
+            <summary>
+            Sets the capacity to the actual number of elements in the list.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.Capacity">
+            <summary>
+            The number of elements that the list can contain.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.Count">
+            <summary>
+            The number of elements actually contained in the list.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.IsFixedSize">
+            <summary>
+            True if the list has a fixed size; otherwise false.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.IsReadOnly">
+            <summary>
+            True if the list is read-only, otherwise false.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.IsSynchronized">
+            <summary>
+            True if the list is synchronized, otherwise false.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.Item(System.Int32)">
+            <summary>
+            Gets a value from the list.
+            </summary>
+        </member>
+        <member name="P:com.calitha.commons.IntegerList.SyncRoot">
+            <summary>
+            An object that can be used to synchronize access to the list.
+            </summary>
+        </member>
+        <member name="T:com.calitha.commons.ResourceUtil">
+            <summary>
+            Summary description for ResourceUtil.
+            </summary>
+        </member>
+        <member name="T:com.calitha.commons.StringUtil">
+            <summary>
+            StringUtil contains a selection of convenience methods for dealing with strings.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.StringUtil.ShowEscapeChars(System.String)">
+            <summary>
+            Replaces the characters null, alert, backspace, form feed,
+            newline, carriage return, horizontal tab and vertical tab
+            with their escaped version. This allows you to show
+            the escape characters.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:com.calitha.commons.CalithaBinReader">
+            <summary>
+            This extension to the binary reader supports direct reading of
+            a unicode (utf-16) string.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.CalithaBinReader.ReadUnicodeString">
+            <summary>
+            Reads a unicode (utf-16) string.
+            </summary>
+            <returns>Unicode string.</returns>
+        </member>
+        <member name="T:com.calitha.commons.HashSet">
+            <summary>
+            Implements a set using a hastable. It is therefore fast even
+            when having large collections.
+            </summary>
+        </member>
+        <member name="M:com.calitha.commons.HashSet.GetEnumerator">
+            <summary>
+            Returns an enumerator that can iterate through a collection.
+            </summary>
+            <returns>An IEnumerator that can be used to iterate through the collection.</returns>
+        </member>
+    </members>
+</doc>

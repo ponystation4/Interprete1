@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldParserEngineTest", "GoldParserEngineTest.csproj", "{49CBEA9D-A5CC-466A-B92D-5337963621FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenValley", "..\GreenValley\GreenValley.csproj", "{9E8F8FBC-29C0-4DCB-83CE-058AA757D570}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldParserEngine", "..\GoldParserEngine\GoldParserEngine.csproj", "{837DC4CB-4BEA-4171-8366-A1AA6207F576}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{49CBEA9D-A5CC-466A-B92D-5337963621FA}.Debug.ActiveCfg = Debug|.NET
+		{49CBEA9D-A5CC-466A-B92D-5337963621FA}.Debug.Build.0 = Debug|.NET
+		{49CBEA9D-A5CC-466A-B92D-5337963621FA}.Release.ActiveCfg = Release|.NET
+		{49CBEA9D-A5CC-466A-B92D-5337963621FA}.Release.Build.0 = Release|.NET
+		{9E8F8FBC-29C0-4DCB-83CE-058AA757D570}.Debug.ActiveCfg = Debug|.NET
+		{9E8F8FBC-29C0-4DCB-83CE-058AA757D570}.Debug.Build.0 = Debug|.NET
+		{9E8F8FBC-29C0-4DCB-83CE-058AA757D570}.Release.ActiveCfg = Release|.NET
+		{9E8F8FBC-29C0-4DCB-83CE-058AA757D570}.Release.Build.0 = Release|.NET
+		{837DC4CB-4BEA-4171-8366-A1AA6207F576}.Debug.ActiveCfg = Debug|.NET
+		{837DC4CB-4BEA-4171-8366-A1AA6207F576}.Debug.Build.0 = Debug|.NET
+		{837DC4CB-4BEA-4171-8366-A1AA6207F576}.Release.ActiveCfg = Release|.NET
+		{837DC4CB-4BEA-4171-8366-A1AA6207F576}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+	GlobalSection(DevPartner) = postSolution
+	EndGlobalSection
+	GlobalSection(DevPartner) = postSolution
+	EndGlobalSection
+EndGlobal

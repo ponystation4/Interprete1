@@ -1,0 +1,1164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GoldParserEngine</name>
+    </assembly>
+    <members>
+        <member name="T:com.calitha.goldparser.TokenReadEventArgs">
+            <summary>
+            Event arguments for the TokenRead event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.TokenReadEventArgs.Token">
+            <summary>
+            The terminal token that will be processed by the LALR parser.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.TokenReadEventArgs.Continue">
+            <summary>
+            Determines if the parse process should continue
+            after this event. True by default.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.ShiftEventArgs">
+            <summary>
+            Event arguments for the Shift event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ShiftEventArgs.Token">
+            <summary>
+            The terminal token that is shifted onto the stack.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ShiftEventArgs.NewState">
+            <summary>
+            The state that the parser is in after the shift.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.ReduceEventArgs">
+            <summary>
+            Event arguments for the Reduce event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ReduceEventArgs.Rule">
+            <summary>
+            The rule that was used to reduce tokens.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ReduceEventArgs.Token">
+            <summary>
+            The nonterminal token that consists of nonterminal or terminal
+            tokens that has been reduced by the rule.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ReduceEventArgs.NewState">
+            <summary>
+            The state after the reduction.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ReduceEventArgs.Continue">
+            <summary>
+            Determines if the parse process should continue
+            after this event. True by default.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.GotoEventArgs">
+            <summary>
+            Event arguments after a goto event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.GotoEventArgs.Symbol">
+            <summary>
+            The symbol that causes the goto event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.GotoEventArgs.NewState">
+            <summary>
+            The state after the goto event.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.AcceptEventArgs">
+            <summary>
+            Event argument for an Accept event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.AcceptEventArgs.Token">
+            <summary>
+            The fully reduced nonterminal token that consists of
+            all the other reduced tokens.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.TokenErrorEventArgs">
+            <summary>
+            Event arguments for a token read error.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.TokenErrorEventArgs.Token">
+            <summary>
+            The error token that also consists of the character that causes the
+            token read error.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.TokenErrorEventArgs.Continue">
+            <summary>
+            The continue property can be set during the token error event,
+            to continue the parsing process. The current token will be ignored.
+            Default value is false.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.ParseErrorEventArgs">
+            <summary>
+            Event arguments for the Parse Error event.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ParseErrorEventArgs.UnexpectedToken">
+            <summary>
+            The token that caused this parser error.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ParseErrorEventArgs.ExpectedTokens">
+            <summary>
+            The symbols that were expected by the parser.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ParseErrorEventArgs.Continue">
+            <summary>
+            The continue property can be set during the parse error event.
+            It can be set to the following:
+            (1) Stop to not try to parse the rest of the input.
+            (2) Insert will pretend that the next token is the one set in
+                NextToken after which the current "bad" token will be parsed again.
+            (3) Skip will just ignore the current bad token and proceed to parse
+                the input as if nothing happened.
+            The default value is Stop.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.ParseErrorEventArgs.NextToken">
+            <summary>
+            If the continue property is set to true, then NextToken will be the
+            next token to be used as input to the parser (it will become the lookahead token).
+            The default value is null, which means that the next token will be read from the
+            normal input stream.
+            stream.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.CommentReadEventArgs">
+            <summary>
+            Event argument for a CommentRead event.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.CommentReadEventArgs.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Creates a new arguments object for a CommentRead event.
+            </summary>
+            <param name="comment">The comment including comment characters</param>
+            <param name="content">The content of the comment</param>
+            <param name="lineComment">True for a line comment, otherwise a 
+                                      block comment.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.CommentReadEventArgs.Comment">
+            <summary>
+            The comment that has been read, including comment characters.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.CommentReadEventArgs.Content">
+            <summary>
+            The content of the comment.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.CommentReadEventArgs.LineComment">
+            <summary>
+            Determines if it is a line or block comment.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.ReduceAction">
+            <summary>
+            ReduceAction is an action that tells the LALR parser to reduce tokens according
+            to a rule.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.Action">
+            <summary>
+            Abstract action class. All actions in a LALR must be inherited from this class.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.lalr.ReduceAction.#ctor(com.calitha.goldparser.SymbolTerminal,com.calitha.goldparser.Rule)">
+            <summary>
+            Creates a new ReduceAction.
+            </summary>
+            <param name="symbol">The symbol that a token must be for this action
+            to be done.</param>
+            <param name="rule">The rule to be used to reduce tokens.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.ReduceAction.Symbol">
+            <summary>
+            the criteria of this action to be done.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.ReduceAction.Rule">
+            <summary>
+            The rule to reduce the tokens.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.EntryCollection">
+            <summary>
+            EntryCollection is a type-safe list of Entry items.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.Entry">
+            <summary>
+            Each record in the file structure contains one or more of these Entry objects.
+            
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.CGTReader">
+            <summary>
+            The CGTReader is for reading a Compiled Grammar Table file and parsing it so that
+            a tokenizer and parser is created.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.CGTReader.#ctor(System.IO.Stream)">
+            <summary>
+            Creates a new reader that will read a Compiler Grammar Table
+            during creation. The reader can then create parsers or tokenizers
+            of this CGT.
+            </summary>
+            <param name="stream">A stream that contains the CGT.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.CGTReader.#ctor(System.String)">
+            <summary>
+            Creates a new reader that will read a Compiler Grammar Table
+            during creation. The reader can then create parsers or tokenizers
+            of this CGT.
+            </summary>
+            <param name="filename">File that contains the CGT</param>
+        </member>
+        <member name="M:com.calitha.goldparser.CGTReader.ReadFile(System.IO.Stream)">
+            <summary>
+            Reads a CGT and creates all the objects needed to create
+            a tokenizer and parser at a later time.
+            </summary>
+            <param name="stream">The CGT stream.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.CGTReader.CreateNewTokenizer">
+            <summary>
+            Creates a new tokenizer. Useful if for some reason
+            you don't want a full LALR parser, but are just interested in a tokenizer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:com.calitha.goldparser.CGTReader.CreateNewParser">
+            <summary>
+            Creates a new LALR parser.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:com.calitha.goldparser.CGTReader.Symbols">
+            <summary>
+            The symbols that are used in the loaded grammar.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.CGTReader.Rules">
+            <summary>
+            The rules that are used in the loaded grammar.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.ActionSubRecordCollection">
+            <summary>
+            ActionSubRecordCollection contains parts a record that define the actions in a LALR state.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.ActionSubRecord">
+            <summary>
+            The ActionSubRecord is a part of a record that define action in a LALR state.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.ActionCollection">
+            <summary>
+            Type-safe list of Action items.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.EdgeSubRecordCollection">
+            <summary>
+            EdgeSubRecordCollection contains a part of a DFA state record.
+            It defines the edges (transactions) between DFA states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.EdgeSubRecord">
+            <summary>
+            The EdgeSubRecord defines an edge (transaction) between DFA states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.StringTokenizer">
+            <summary>
+            This class is used to split a string into tokens.
+            It needs a Deterministic Finite Automata to accomplish this.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.#ctor(com.calitha.goldparser.dfa.DFA)">
+            <summary>
+            Creates a new tokenizer.
+            </summary>
+            <param name="dfa">A Deterministic Finite Automata</param>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.SetInput(System.String)">
+            <summary>
+            Sets the input string for the tokenizer.
+            </summary>
+            <param name="input">The input string</param>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.GetInput">
+            <summary>
+            Gets the input string for the tokenizer.
+            </summary>
+            <returns>input</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.GetCurrentLocation">
+            <summary>
+            Gets a copy of the current location where the tokenizer
+            is on the input.
+            </summary>
+            <returns>Current location</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.RetrieveToken">
+            <summary>
+            Retrieves a token from the input string. This method can be called multiple
+            time to get tokens further on the input string.
+            </summary>
+            <returns>The token</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.SkipToChar(System.Char)">
+            <summary>
+            Advances the position on the input string until a certain character is
+            encountered. The input will point to this character for the next token
+            that will be retrieved.
+            </summary>
+            <param name="ch">The character that will be searched for.</param>
+            <returns>It will return false if the end-of-file will be reached before
+            the character is found.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.StringTokenizer.SkipAfterChar(System.Char)">
+            <summary>
+            Advances the position on the input string until after a certain character is
+            encountered.
+            </summary>
+            <param name="ch">The character that will be searched for.</param>
+            <returns>It will return false if the end-of-file will be reached before
+            the character is found.</returns>
+        </member>
+        <member name="T:com.calitha.goldparser.DFAInput">
+            <summary>
+            Wrapper for the input of the parser.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.DFAInput.#ctor(System.String)">
+            <summary>
+            Creates a new wrapper for the input.
+            </summary>
+            <param name="text">Input text.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.DFAInput.ReadChar">
+            <summary>
+            Reads a character from the input and updates the location information.
+            </summary>
+            <returns>The character that has been read.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.DFAInput.ReadCharNoUpdate">
+            <summary>
+            Reads a character from the input without updating the location information.
+            </summary>
+            <returns>The character that has been read.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.DFAInput.SkipToChar(System.Char)">
+            <summary>
+            Skips characters in the input until a certain character is found.
+            A ReadChar after this call will again read this last character.
+            </summary>
+            <param name="ch">The character to look for.</param>
+            <returns>True if successfull, or false if the end-of-file is encountered before
+            the character that is searched for.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.DFAInput.SkipAfterChar(System.Char)">
+            <summary>
+            Skips characters in the input until after a certain character is found.
+            </summary>
+            <param name="ch">The character to look for.</param>
+            <returns>True if successfull, or false if the end-of-file is encountered before
+            the character that is searched for.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.DFAInput.IsEof">
+            <summary>
+            Determines if the input has reached the end.
+            </summary>
+            <returns>True if at the end, otherwise false.</returns>
+        </member>
+        <member name="P:com.calitha.goldparser.DFAInput.Text">
+            <summary>
+            The input string.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.DFAInput.Location">
+            <summary>
+            Information about the current location of the input.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.DFAInput.Position">
+            <summary>
+            The current position of the input.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.AcceptInfo">
+            <summary>
+            AcceptInfo stores information when the DFA is in a accept state.
+            The information is later used to get a token from the input.
+            AcceptInfo is needed because it is not possible to know yet if the accept state
+            is the final accept state in the DFA.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.AcceptInfo.#ctor(com.calitha.goldparser.dfa.EndState,com.calitha.goldparser.Location)">
+            <summary>
+            Creates a new accept state object.
+            </summary>
+            <param name="state">The accept state in the DFA.</param>
+            <param name="location">The input location when the DFA was in this state.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.AcceptInfo.State">
+            <summary>
+            The accept state.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.AcceptInfo.Location">
+            <summary>
+            The location information of the input.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.DFAStateRecord">
+            <summary>
+            The DFAStateRecord is a record that defines a DFA state.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.CGTStructureException">
+            <summary>
+            This exception will be thrown when something is wrong in the cgt structure.
+            For example if the entry type is unknown.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.Location">
+            <summary>
+            The Location defines positional information of the input that is being parsed.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.Location.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a new Location object.
+            </summary>
+            <param name="position">Zero based position.</param>
+            <param name="lineNr">Zero based line number.</param>
+            <param name="columnNr">Zero based column number.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.Location.#ctor(com.calitha.goldparser.Location)">
+            <summary>
+            Creates a new Location object.
+            </summary>
+            <param name="location">Positional information will be copied from this object.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.Location.ToString">
+            <summary>
+            Converts the location to a string. Line number and column number will be
+            incremented by one.
+            </summary>
+            <returns>The output string.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.Location.NextLine">
+            <summary>
+            Signals that the input has encountered an end-of-line.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.Location.NextColumn">
+            <summary>
+            Signals that the input has advanced one character (which was not an end-of-line.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.Location.Position">
+            <summary>
+            The zero-based position.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.Location.LineNr">
+            <summary>
+            The zero-based line number.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.Location.ColumnNr">
+            <summary>
+            The zero-based column number.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.Token">
+            <summary>
+            Abstract class representing both terminal and nonterminal tokens.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.Token.UserObject">
+            <summary>
+            This can be user for storing an object during the reduce
+            event. This makes it possible to create a tree when the
+            source is being parsed.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.TerminalToken">
+            <summary>
+            Terminal token objects are retrieved from the tokenizer.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.TerminalToken.#ctor(com.calitha.goldparser.SymbolTerminal,System.String,com.calitha.goldparser.Location)">
+            <summary>
+            Creates a new terminal token object.
+            </summary>
+            <param name="symbol">The symbol that this token represents.</param>
+            <param name="text">The text from the input that is the token.</param>
+            <param name="location">The location in the input that this token
+            has been found.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.TerminalToken.ToString">
+            <summary>
+            String representation of the token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:com.calitha.goldparser.TerminalToken.Symbol">
+            <summary>
+            The symbol that this token represents.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.TerminalToken.Text">
+            <summary>
+            The text from the input that is this token.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.TerminalToken.Location">
+            <summary>
+            The location in the input that this token was found.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.NonterminalToken">
+            <summary>
+            The nonterminal token is created when tokens are reduced by a rule.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.NonterminalToken.#ctor(com.calitha.goldparser.Rule,com.calitha.goldparser.Token[])">
+            <summary>
+            Creates a new nonterminal token.
+            </summary>
+            <param name="rule">The reduction rule.</param>
+            <param name="tokens">The tokens that are reduced.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.NonterminalToken.ToString">
+            <summary>
+            String representation of the nonterminal token.
+            </summary>
+            <returns>The string.</returns>
+        </member>
+        <member name="P:com.calitha.goldparser.NonterminalToken.Symbol">
+            <summary>
+            The symbol that this nonterminal token represents.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.NonterminalToken.Tokens">
+            <summary>
+            The tokens that are reduced.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.NonterminalToken.Rule">
+            <summary>
+            The rule that caused the reduction.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.StateStack">
+            <summary>
+            The stack of LALR states for the parser. It is used to store the current and
+            previous states, which is usefull if a reduction occurs.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.StateStack.#ctor">
+            <summary>
+            Creates a new stack.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.StateStack.Clear">
+            <summary>
+            Clears the entire stack.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.StateStack.Peek">
+            <summary>
+            Peeks to see the state on the top of the stack.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:com.calitha.goldparser.StateStack.Pop">
+            <summary>
+            Pops the state on the top from the stack.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:com.calitha.goldparser.StateStack.Push(com.calitha.goldparser.lalr.State)">
+            <summary>
+            Pushes a state on top of the stack.
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="P:com.calitha.goldparser.StateStack.Count">
+            <summary>
+            The number of states on the stack.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.ShiftAction">
+            <summary>
+            ShiftAction is an action to shift a token to the token stack.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.lalr.ShiftAction.#ctor(com.calitha.goldparser.SymbolTerminal,com.calitha.goldparser.lalr.State)">
+            <summary>
+            Creates a new shift action.
+            </summary>
+            <param name="symbol">The symbol that the token must be for this action to be done.</param>
+            <param name="state">The new current state for the LALR parser.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.ShiftAction.Symbol">
+            <summary>
+            The criteria for this action to be done.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.ShiftAction.State">
+            <summary>
+            The new current state for the LALR parser.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.LALRParser">
+            <summary>
+            The LALR Parser is used to parse a source string into tokens and rules.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.LALRParser.#ctor(com.calitha.goldparser.IStringTokenizer,com.calitha.goldparser.lalr.StateCollection,com.calitha.goldparser.lalr.State,com.calitha.goldparser.SymbolCollection)">
+            <summary>
+            Creates a new LALR parser.
+            </summary>
+            <param name="tokenizer">A tokenizer.</param>
+            <param name="states">The LALR states.</param>
+            <param name="startState">The starting state.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.LALRParser.Parse(System.String)">
+            <summary>
+            Parse the input with tokens and rules.
+            </summary>
+            <param name="input">The source input</param>
+            <returns>The nonterminal token that the input has been reduced to.
+            Null if the parse has failed.</returns>
+        </member>
+        <member name="P:com.calitha.goldparser.LALRParser.TrimReductions">
+            <summary>
+            Trim Reductions.
+            When true there will be no reductions for single nonterminal rules,
+            and no events for this will be generated.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.LALRParser.StoreTokens">
+            <summary>
+            This property determines if reduced tokens should be stored
+            in a reduced token after the reduce event has occured.
+            There are three possible values:
+            Always means that the tokens should always be kept,
+            NoUserObject (default) means that the tokens should only be kept if there
+            was no user object assigned in the reduced token,
+            Never means that the tokens are no longer available after the reduce event.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnTokenRead">
+            <summary>
+            This event will be called if a token has been read which will be parsed by
+            the LALR parser.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnShift">
+            <summary>
+            This event will be called when a token is shifted onto the stack.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnReduce">
+            <summary>
+            This event will be called when tokens are reduced.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnGoto">
+            <summary>
+            This event will be called when a goto occurs (after a reduction).
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnAccept">
+            <summary>
+            This event will be called if the parser is finished and the input has been
+            accepted.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnTokenError">
+            <summary>
+            This event will be called when the tokenizer cannot recognize the input.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnParseError">
+            <summary>
+            This event will be called when the parser has a token it cannot parse.
+            </summary>
+        </member>
+        <member name="E:com.calitha.goldparser.LALRParser.OnCommentRead">
+            <summary>
+            This event will be called when a comment section has been read.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.State">
+            <summary>
+            DFA State.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.State.#ctor(System.Int32)">
+            <summary>
+            Creates a new DFA state.
+            </summary>
+            <param name="id">The id of this state.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.State.Id">
+            <summary>
+            The id of the DFA state.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.State.Transitions">
+            <summary>
+            The transitions (edges) to other states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.EndState">
+            <summary>
+            A specific type of DFA state. When the current state of the DFA is an EndState,
+            then it means the input so far can be a token.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.EndState.AcceptSymbol">
+            <summary>
+            The accept symbol for the DFA.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.StateCollection">
+            <summary>
+            Type-safe list for DFA states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.CGTContentException">
+            <summary>
+            This exception is thrown if something is wrong with the cgt content.
+            For example if there are not enough entries in a record.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.TableCounts">
+            <summary>
+            The TableCounts contain how many record there are for symbols, character sets,
+            rules, DFA states and LALR states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.Symbol">
+            <summary>
+            Abstract symbol implementation.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolNonterminal">
+            <summary>
+            SymbolNonterminal is for symbols that are not directly linked to one token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolTerminal">
+            <summary>
+            SymbolTerminal is a symbol that is linked to a token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolWhiteSpace">
+            <summary>
+            SymbolWhiteSpace is the symbol of white-space tokens.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolEnd">
+            <summary>
+            SymbolEnd is the symbol for the end-of-file token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolCommentStart">
+            <summary>
+            SymbolCommentStart is the symbol for the comment start token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolCommentEnd">
+            <summary>
+            SymbolCommentEnd is the symbol for the comment end token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolCommentLine">
+            <summary>
+            SymbolCommentLine is the symbol for the comment line token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolError">
+            <summary>
+            SymbolError is the symbol for the error token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolCollection">
+            <summary>
+            Type-safe list for Symbol objects.
+            The class contains constant symbol objects for the pre-defined terminal symbols.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.SymbolRecord">
+            <summary>
+            The SymbolRecord is a record that defines a symbol.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.LALRStateRecord">
+            <summary>
+            The LALRStateRecord is a record the defines a LALR state.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.CGTStructure">
+            <summary>
+            The CGTStructure contains the header and records that are in the
+            compiled grammar table.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.ParserException">
+            <summary>
+            ParserException is throws when an unexpected situation occurs while parsing.
+            For example if the LALR parser is in a state where no actions can be taken.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.CGTContent">
+            <summary>
+            The CGTContent contains all the records that is needed to implement a parser.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.EntryFactory">
+            <summary>
+            The EntryFactory can create the correct Entry object by looking at the
+            entry type byte.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.State">
+            <summary>
+            State is a LALR state.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.lalr.State.#ctor(System.Int32)">
+            <summary>
+            Creates a new LALR state.
+            </summary>
+            <param name="id">The id of the state.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.State.Id">
+            <summary>
+            Id of the state.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.State.Actions">
+            <summary>
+            Actions in this state. An action will be done depending on the
+            symbol of the token.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.StateCollection">
+            <summary>
+            Type-safe list of LALR states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.GotoAction">
+            <summary>
+            A GotoAction is an action that tells the LALR parser to go to a new state.
+            A goto action happens after a reduction.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.lalr.GotoAction.#ctor(com.calitha.goldparser.SymbolNonterminal,com.calitha.goldparser.lalr.State)">
+            <summary>
+            Creates a new goto action. 
+            </summary>
+            <param name="symbol">The symbol that a reduction must be so that
+            the goto action will be done.</param>
+            <param name="state">The new current state for the LALR parser.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.GotoAction.Symbol">
+            <summary>
+            The symbol that is the criteria for the action to be done.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.GotoAction.State">
+            <summary>
+            The new current state for the LALR parser.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.DFAStateTable">
+            <summary>
+            The DFAStateTable contains a list of DFA state records.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.LALRStateTable">
+            <summary>
+            LALRStateTable is a list of records the define LALR states.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.InitialStatesRecord">
+            <summary>
+            The InitialStatesRecord identifies the starting states for the DFA and LALR parser.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.SymbolFactory">
+            <summary>
+            The SymbolFactory is for creating a symbol identified by a record in
+            the fil content.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.SymbolFactory.CreateSymbol(com.calitha.goldparser.content.SymbolRecord)">
+            <summary>
+            Creates a new symbol or gives a reference to a symbol that is
+            determined by the type of the symbol record in the file content.
+            </summary>
+            <param name="symbolRecord"></param>
+            <returns></returns>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.IDFA">
+            <summary>
+            The interface for the Deterministic Finite Automata
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.IDFA.Reset">
+            <summary>
+            Sets the DFA back to the starting state, so it can be used to get a new token.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.IDFA.GotoNext(System.Char)">
+            <summary>
+            Goto the next state depending on an input character.
+            </summary>
+            <param name="ch">The character that determines what state to go to next.</param>
+            <returns>The new current state.</returns>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.IDFA.CurrentState">
+            <summary>
+            The current state in the DFA.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.DFA">
+            <summary>
+            Implementation of a Deterministic Finite Automata.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.DFA.#ctor(com.calitha.goldparser.dfa.StateCollection,com.calitha.goldparser.dfa.State)">
+            <summary>
+            Creates a new DFA.
+            </summary>
+            <param name="states">The states that are part of the DFA.</param>
+            <param name="startState">The starting state</param>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.DFA.Reset">
+            <summary>
+            Sets the DFA back to the starting state, so it can be used to get a new token.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.DFA.GotoNext(System.Char)">
+            <summary>
+            Goto the next state depending on an input character.
+            </summary>
+            <param name="ch">The character that determines what state to go to next.</param>
+            <returns>The new current state.</returns>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.DFA.CurrentState">
+            <summary>
+            The current state in the DFA.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.Parameters">
+            <summary>
+            The Parameter define miscellaneous parameters of the compiled grammar.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.CharacterSetTable">
+            <summary>
+            CharacterSetTable contains a list of CharacterSet records.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.TokenStack">
+            <summary>
+            Stack of tokens and reductions.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.TokenStack.#ctor">
+            <summary>
+            Creates a new empty stack.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.TokenStack.Clear">
+            <summary>
+            Clears the entire stack.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.TokenStack.Peek">
+            <summary>
+            Peeks to see the top of the stack.
+            </summary>
+            <returns>The top of the stack.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.TokenStack.Pop">
+            <summary>
+            Pops the top item from the stack.
+            </summary>
+            <returns>The top of the stack.</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.TokenStack.Push(com.calitha.goldparser.Token)">
+            <summary>
+            Pushes an item on the stack.
+            </summary>
+            <param name="token">The items that will be pushed.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.TokenStack.Count">
+            <summary>
+            The number of items on the stack.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.RuleCollection">
+            <summary>
+            Type-safe list of Rule objects.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.Rule">
+            <summary>
+            The Rule consists of the symbols that can be reduced to another symbol.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.Rule.#ctor(System.Int32,com.calitha.goldparser.SymbolNonterminal,com.calitha.goldparser.Symbol[])">
+            <summary>
+            Creates a new rule.
+            </summary>
+            <param name="id">Id of this rule.</param>
+            <param name="lhs">Left hand side. The other symbols can be reduced to
+            this symbol.</param>
+            <param name="rhs">The right hand side. The symbols that can be reduced.</param>
+        </member>
+        <member name="M:com.calitha.goldparser.Rule.ToString">
+            <summary>
+            String representation of the rule.
+            </summary>
+            <returns>The string.</returns>
+        </member>
+        <member name="P:com.calitha.goldparser.Rule.Id">
+            <summary>
+            Id of this rule.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.Rule.Lhs">
+            <summary>
+            Left hand side. The other symbols can be reduced to
+            this symbol.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.Rule.Rhs">
+            <summary>
+            Right hand side. The symbols that can be reduced.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.ActionFactory">
+            <summary>
+            Factory class for creating Action objects..
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.lalr.ActionFactory.CreateAction(com.calitha.goldparser.content.ActionSubRecord,com.calitha.goldparser.lalr.StateCollection,com.calitha.goldparser.SymbolCollection,com.calitha.goldparser.RuleCollection)">
+            <summary>
+            Creates a new action by specifying the needed information.
+            </summary>
+            <param name="record">A part of the LALR record from the file content.</param>
+            <param name="states">The LALR states.</param>
+            <param name="symbols">The symbols.</param>
+            <param name="rules">The rules.</param>
+            <returns>A new action object.</returns>
+        </member>
+        <member name="T:com.calitha.goldparser.lalr.AcceptAction">
+            <summary>
+            An AcceptAction is an action in a LALR state which means that the input for the
+            LALR parser is tokenized, parsed and accepted .
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.lalr.AcceptAction.#ctor(com.calitha.goldparser.SymbolTerminal)">
+            <summary>
+            Creates a new accept action.
+            </summary>
+            <param name="symbol">The symbol that a token must be for it to be accepted.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.lalr.AcceptAction.Symbol">
+            <summary>
+            The symbol that a token must be for it to be accepted.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.Transition">
+            <summary>
+            A transition (edge) between DFA states. The source and target state can be the same.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.dfa.Transition.#ctor(com.calitha.goldparser.dfa.State,System.String)">
+            <summary>
+            Creates a new transition by specifying the target state and the criteria for
+            taking a transition to another state. The source state does not need to be
+            specified, because the state itself knows its transition.
+            </summary>
+            <param name="target">The target state.</param>
+            <param name="characters">The character set criteria.</param>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.Transition.Target">
+            <summary>
+            The target state.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.dfa.Transition.CharSet">
+            <summary>
+            The criteria for going to the target state.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.dfa.TransitionCollection">
+            <summary>
+            A type-safe list of transitions.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.RuleRecord">
+            <summary>
+            The RuleRecord is a record the defines a rule to reduce tokens.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.CharacterSetRecord">
+            <summary>
+            The CharacterSetRecord is a record that defines a character set.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.RecordCollection">
+            <summary>
+            RecordCollection is a type-safe list for Record items.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.structure.Record">
+            <summary>
+            The Record is part of the compiled grammar table that contains one or more entries.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.SymbolTable">
+            <summary>
+            The SymbolTable contains a list of symbol records.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.content.RuleTable">
+            <summary>
+            The RuleTable contains a list of rules.
+            </summary>
+        </member>
+    </members>
+</doc>

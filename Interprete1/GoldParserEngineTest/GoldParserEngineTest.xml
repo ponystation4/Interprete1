@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GoldParserEngineTest</name>
+    </assembly>
+    <members>
+        <member name="T:com.calitha.goldparser.test.UserSettings">
+            <summary>
+            A UserSettings object represents the current settings
+            for this application.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.#ctor">
+            <summary>
+            Creates new default settings.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.Save(System.String)">
+            <summary>
+            Saves the settings to a file.
+            </summary>
+            <param name="filename">filename</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.Load(System.String)">
+            <summary>
+            Loads the settings from a file.
+            </summary>
+            <param name="filename">filename</param>
+            <returns>settings</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.GetLastGrammar">
+            <summary>
+            Gets the filename of the last opened CGT file.
+            </summary>
+            <returns>filename</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.SetLastGrammar(System.String)">
+            <summary>
+            Sets the filename of the last openened CGT file.
+            </summary>
+            <param name="lastGrammar">filename</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.GetLastSource">
+            <summary>
+            Gets the last openened source file.
+            </summary>
+            <returns>filename</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.SetLastSource(System.String)">
+            <summary>
+            Sets the last opened source file.
+            </summary>
+            <param name="lastSource">filename</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.GetFont">
+            <summary>
+            Gets the font for the user interface.
+            </summary>
+            <returns>font</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.SetFont(System.Drawing.Font)">
+            <summary>
+            Sets the font for the user interface.
+            </summary>
+            <param name="font">font</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.GetMaxErrorsIndex">
+            <summary>
+            Gets the maximum errors combobox index.
+            </summary>
+            <returns>index</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.SetMaxErrorsIndex(System.Int32)">
+            <summary>
+            Sets the maximum errors combobox index.
+            </summary>
+            <param name="maxErrorsIndex">index</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.GetTrimReductions">
+            <summary>
+            Gets the trim reductions mode.
+            </summary>
+            <returns>trim reductions mode</returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.UserSettings.SetTrimReductions(System.Boolean)">
+            <summary>
+            Sets the trim reductions mode.
+            </summary>
+            <param name="trimReductions">trim reductions mode</param>
+        </member>
+        <member name="P:com.calitha.goldparser.test.UserSettings.LastGrammar">
+            <summary>
+            Last opened CGT file.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.test.UserSettings.LastSource">
+            <summary>
+            Last opened source file.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.test.UserSettings.Font">
+            <summary>
+            User interface font.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.test.UserSettings.MaxErrorsIndex">
+            <summary>
+            Maximum errors combobox index.
+            </summary>
+        </member>
+        <member name="P:com.calitha.goldparser.test.UserSettings.TrimReductions">
+            <summary>
+            Trim reductions mode.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.test.AboutForm">
+            <summary>
+            Summary description for AboutForm.
+            </summary>
+        </member>
+        <member name="F:com.calitha.goldparser.test.AboutForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.AboutForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.AboutForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:com.calitha.goldparser.test.GoldForm">
+            <summary>
+            Summary description for Form1.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.GetConfigFilename">
+            <summary>
+            Gets the configuration filename for this application.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.SaveSettings">
+            <summary>
+            Tries to save the user settings. Ignores any errors.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.WriteLn(System.String)">
+            <summary>
+            Writes a log line to the user interface.
+            </summary>
+            <param name="str"></param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.TokenReadEvent(com.calitha.goldparser.LALRParser,com.calitha.goldparser.TokenReadEventArgs)">
+            <summary>
+            Event handler for the action of reading a token.
+            </summary>
+            <param name="parser">parser that is the source of this event</param>
+            <param name="args">event arguments</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.ShiftEvent(com.calitha.goldparser.LALRParser,com.calitha.goldparser.ShiftEventArgs)">
+            <summary>
+            Event handler for the shift action.
+            </summary>
+            <param name="parser">parser that is the source of this event</param>
+            <param name="args">event arguments</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.ReduceEvent(com.calitha.goldparser.LALRParser,com.calitha.goldparser.ReduceEventArgs)">
+            <summary>
+            Event handler for the reduce action.
+            </summary>
+            <param name="parser">parser that is the source of this event</param>
+            <param name="args">event arguments</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.GotoEvent(com.calitha.goldparser.LALRParser,com.calitha.goldparser.GotoEventArgs)">
+            <summary>
+            Event handlers for the goto action.
+            </summary>
+            <param name="parser">parser that is the source of this event</param>
+            <param name="args">parser that is the source of this event</param>
+        </member>
+        <member name="M:com.calitha.goldparser.test.GoldForm.CommentReadEvent(com.calitha.goldparser.LALRParser,com.calitha.goldparser.CommentReadEventArgs)">
+            <summary>
+            Event handler for the reading a comment.
+            </summary>
+            <param name="parser">parser that is the source of this event</param>
+            <param name="args">event arguments</param>
+        </member>
+    </members>
+</doc>
