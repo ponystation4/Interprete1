@@ -543,7 +543,7 @@ namespace com.calitha.goldparser
                         {
                             encontrado2 = true;
                             tipo = TablaSimbolo[i].tipo;
-                            indice = TablaSimbolo[i].indice
+                            indice = TablaSimbolo[i].indice;
                         }
                     if (encontrado2)
                         if (tipo == "cadena") cadena[indice] = Convert.ToString(token.Tokens[2].UserObject).Trim('"');
@@ -562,7 +562,7 @@ namespace com.calitha.goldparser
                         {
                             encontrado3 = true;
                             tipo1 = TablaSimbolo[i].tipo;
-                            indice1 = TablaSimbolo[i].indice
+                            indice1 = TablaSimbolo[i].indice;
                         }
                     if (encontrado3)
                         if (tipo1 == "entero") entero[indice1] = Convert.ToInt32(token.Tokens[2].UserObject);
@@ -631,7 +631,7 @@ namespace com.calitha.goldparser
                             else if (TablaSimbolo[i].tipo == "caracter") cadenaid = Convert.ToString(caracter[TablaSimbolo[i].indice]);
                             return Convert.ToString(token.Tokens[0].UserObject) + cadenaid;
                         }
-                    MessageBox.Show("Error: " + Convert.ToStringString(token.Tokens[2].UserObject) + " No está definida");
+                    MessageBox.Show("Error: " + Convert.ToString(token.Tokens[2].UserObject) + " No está definida");
                 return token.Tokens[2].UserObject;
 
                 case (int)RuleConstants.RULE_VALLITERALES__CARACTER :
@@ -702,7 +702,7 @@ namespace com.calitha.goldparser
                         {
                             if (TablaSimbolo[i].tipo == "entero") return entero[TablaSimbolo[i].indice];
                             else if (TablaSimbolo[i].tipo == "real") return real[TablaSimbolo[i].indice];
-                            else MessageBpx.Show("Error de tipo: " + Convert.ToString(token.Tokens[0].UserObject) + " No es tipo entero o real");
+                            else MessageBox.Show("Error de tipo: " + Convert.ToString(token.Tokens[0].UserObject) + " No es tipo entero o real");
                             return null;
                         }
                     MessageBox.Show("Error: " + Convert.ToString(token.Tokens[0].UserObject) + " No está definida");
