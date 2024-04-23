@@ -5,6 +5,11 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interprete1", "Interprete1\Interprete1.csproj", "{B97B4DBB-A357-4EEC-8B29-F9A2E2E4E5A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solución", "Elementos de la solución", "{015F464F-7009-42DB-B2EC-01958007F50B}"
+	ProjectSection(SolutionItems) = preProject
+		Interprete1\Interprete.cgt = Interprete1\Interprete.cgt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

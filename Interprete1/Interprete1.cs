@@ -464,7 +464,7 @@ namespace com.calitha.goldparser
                     {
                         dato.id = Convert.ToString(aux3[i]);
                         dato.tipo = Convert.ToString(aux3[aux3.Count - 1]);
-                        for (int j = 0; j < TablasSimbolo.Count; j++)
+                        for (int j = 0; j < TablaSimbolo.Count; j++)
                         {
                             if (TablaSimbolo[j].id == dato.id) encontrado = true;
                             if (TablaSimbolo[j].tipo == dato.tipo) nuevo_indice = TablaSimbolo[j].indice;
